@@ -1,16 +1,11 @@
-import { MouseEventHandler} from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-type Params = {
-  prevFormStep?: MouseEventHandler, 
-  nextFormStep: Function, 
-  title: string,
-  name: string,
-  adjective?: string,
-  defaultValues: any
-}
+import { Profile } from '../../context/event-data';
+
+
 const schema = yup.object({
+  id: yup.string(),
   civility: yup.string()
         .required("Ce champ est requis"),
   firstName: yup.string()
@@ -23,15 +18,21 @@ const schema = yup.object({
         .required("Ce champ est requis")
         .min(10, "Téléphone invalide")
         .max(10, "Téléphone invalide"),
+  sendInvitation: yup.bool()
 }).required();
 
-function GuestEdit({handleSubmit}) {
+function GuestEdit({handleSubmit}: {handleSubmit: Function}) {
   const { register, handleSubmit: handleFormSubmit, reset, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
+    defaultValues: { id: '', civility: '', firstName: '', lastName: '',  email: '', phone: '', sendInvitation: false}
   });
+  const onSubmit = (data: Profile) => {
+    reset();
+    handleSubmit(data);
+  }
 
 	return (
-		 <form onSubmit={handleFormSubmit(handleSubmit)}>
+		 <form onSubmit={handleFormSubmit(onSubmit)}>
        <div className="grid grid-cols-2 gap-4">        
        <div className="mb-0 text-md">
           <label htmlFor="civility" className="form-label">Civilité</label>

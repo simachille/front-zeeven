@@ -1,6 +1,6 @@
 
 import React from 'react';
-import OpenedStack from '../../layouts/openedstack/Index';
+import OpenedStack from '../../components/layouts/openedstack/Index';
 
 function Error() {
 

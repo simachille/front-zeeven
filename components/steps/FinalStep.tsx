@@ -11,8 +11,12 @@ function FinalStep() {
 
   const saveEvent = useCallback(
       async () => {
+        let name = '';
+        if (event && event.contacts) {
+          name = `Mariage de ${event?.contacts[0]?.firstName} et ${event.contacts[1].firstName}`;
+        }
         const eventToSave =  {
-          name: `Mariage de ${event?.contacts[0]?.firstName} et ${event.contacts[1].firstName}`,
+          name,
           ... event
         }
         try {
@@ -30,7 +34,7 @@ function FinalStep() {
   } 
   useEffect(() => {
     saveEvent();
-  }, [])
+  }, [saveEvent])
 
   return (
     <div className='text-2xl'>

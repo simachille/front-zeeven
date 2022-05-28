@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps } from 'next'
 
 import { useSession, signIn, signOut, getSession } from "next-auth/react"
-import OpenedStack from '../layouts/openedstack/Index';
+import OpenedStack from '../components/layouts/openedstack/Index';
 function Home() {
   const { data: session } = useSession()
   return (
@@ -15,7 +15,7 @@ function Home() {
 
 export default Home;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
   if(session) {
     return {

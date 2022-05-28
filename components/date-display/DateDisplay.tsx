@@ -22,7 +22,7 @@ const days = [
   'Ven.', 
   'Sam.'
 ]
-function DateDisplay({entry}:{entry: string}) {
+function DateDisplay({entry}:{entry: Date}) {
   const [formattedDate, setFormattedDate] = useState('')
   useEffect(() => {
     const date = new Date(entry);

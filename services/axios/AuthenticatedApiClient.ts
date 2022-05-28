@@ -14,7 +14,11 @@ const AuthenticatedApiClient = () => {
   const instance = axios.create(defaultOptions);
 
   instance.interceptors.request.use(async (request) => {
-    const {token} = await getSession();
+    const data = await getSession();
+    let token: any = {};
+    if (data && data.token) {
+      token = data.token;
+    }
     if (token && request.headers) {
       request.headers.Authorization = `Bearer ${token.token}`;
     }

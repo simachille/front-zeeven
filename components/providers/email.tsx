@@ -1,21 +1,28 @@
 import { signIn } from 'next-auth/react';
-import Link from 'next/link';
 import React, { useEffect } from 'react';
-import OpenedStack from '../../layouts/openedstack/Index';
+import OpenedStack from '../layouts/openedstack/Index';
 import { getCsrfToken, getProviders } from "next-auth/react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+
+
+type UserCredentials = {
+  email: string,
+}
+
 const schema = yup.object({
   email: yup.string().email("Email invalide").required("Ce champ est requis"),
 }).required();
+
 function Email() {
-  const { register, handleSubmit, formState:{ errors } } = useForm({
+  const { register, handleSubmit, formState:{ errors } } = useForm<UserCredentials>({
     resolver: yupResolver(schema)
   });
   
-  const onSubmit = ({email}:{email: string}) => {
-    signIn("email", { email,  callbackUrl: 'http://localhost:3000'})
+  const onSubmit = (credentials: UserCredentials) => {
+    const {email} = credentials;
+    signIn("email", { email})
   };
 
 	return (

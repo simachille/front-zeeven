@@ -1,28 +1,16 @@
-import { getSession } from 'next-auth/react';
 import React, { useContext, useEffect } from 'react'
-import ProtectedStack from '../../layouts/protectedstack/Index'
-import EventContext, { NewEventContext } from '../../context';
+import ProtectedStack from '../../components/layouts/protectedstack/Index'
+import { NewEventContext } from '../../context';
 import EventList from '../../components/events/list/EventList';
 
-function Account({session}) {
-  
+export default function Account() {
   const {resetEvent} = useContext(NewEventContext);
   useEffect(() => {
     resetEvent();
-  }, [])
+  }, [resetEvent])
 	return (
-		<ProtectedStack>
-       
-        <EventList />
-		</ProtectedStack>
+    <ProtectedStack>
+      <EventList />
+    </ProtectedStack>
   )
 }
-
-export async function getServerSideProps(ctx) {
-  return {
-    props: {
-      session: await getSession(ctx)
-    }
-  }
-}
-export default Account;

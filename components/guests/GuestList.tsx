@@ -1,7 +1,8 @@
 import React from 'react'
 import  {DeleteOutlined} from '@ant-design/icons';
+import { Profile } from '../../context/event-data';
 
-function GuestList({guests}) {
+function GuestList({guests}: {guests: Profile[]}) {
   return (
     <>
     <table className="table-auto my-4 border-collapse">

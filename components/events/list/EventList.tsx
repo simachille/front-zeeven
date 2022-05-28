@@ -1,9 +1,10 @@
 import React, {useEffect, useState, useCallback} from 'react'
+import { Event } from '../../../context/event-data';
 import AuthenticatedApiClient from '../../../services/axios/AuthenticatedApiClient';
 import EventItem from './EventItem';
 
 function EventList() {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const readData = useCallback(
     async () => {
       try {
@@ -16,7 +17,7 @@ function EventList() {
   [])
   useEffect(() => {
     readData();
-  }, [])
+  }, [readData])
   return (
     <section className='py-10'>
         <h2 className='font-nunito text-2xl text-blue-800'>

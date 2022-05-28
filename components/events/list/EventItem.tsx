@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import React from 'react'
+import { Event } from '../../../context/event-data';
 import DateDisplay from '../../date-display/DateDisplay';
 
-function EventItem({event}) {
+function EventItem({event}: {event: Event}) {
   const router = useRouter();
   const display = () => {
     router.push(`evenements/${event.id}`)
@@ -13,7 +14,7 @@ function EventItem({event}) {
       <div>
         <h2 className='color text-gray-600 font-semibold text-lg font-nunito '>{event.name}</h2>
         <div className="flex my-3">
-        {event.days.map((day: string) => <DateDisplay entry={day} key={day}/>)}
+        {event.days ? event.days.map((day: Date, index: number) => <DateDisplay entry={day} key={index} />) : null}
         </div>
       </div>
       <div className="flex py-2 justify-center">

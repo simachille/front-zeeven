@@ -1,15 +1,16 @@
 import React from 'react';
-import OpenedStack from '../../layouts/openedstack/Index';
-import { getCsrfToken, getProviders } from "next-auth/react"
+import OpenedStack from '../../components/layouts/openedstack/Index';
+import { ClientSafeProvider, getCsrfToken, getProviders } from "next-auth/react"
 
 import Credentials from '../../components/providers/credentials';
+import { GetServerSideProps } from 'next';
 
-function SignIn({ providers }) {
+function SignIn({ providers }: {providers: ClientSafeProvider[]}) {
  
 	return (
 		<OpenedStack>
       <>
-        {Object.values(providers).map(({id}) => (
+        {Object.values(providers).map(({id}: {id: string}) => (
           (()=> {
             switch (id) {
               case 'credentials':
@@ -24,7 +25,8 @@ function SignIn({ providers }) {
 
 export default SignIn;
 
-export async function getServerSideProps(context) {
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const csrfToken = await getCsrfToken(context);
   const providers = await getProviders();
 

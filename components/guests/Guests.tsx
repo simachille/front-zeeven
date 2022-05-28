@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import  {UserAddOutlined} from '@ant-design/icons';
 import GuestEdit from './GuestEdit';
 import { Profile } from '../../context/event-data';
@@ -11,14 +11,14 @@ function Guests() {
   const [guests, setGuests] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
   
-  const fetchGuests = async () => {
+  const fetchGuests = useCallback(async () => {
     try {
       const apiClient = AuthenticatedApiClient();
       const {data} = await apiClient.get(`event/${id[0]}/guest`);
       setGuests(data);
     } catch (error) {
     }
-  }
+  }, [id])
 
   const onSubmit = async (profile: Profile) => {
     setFormVisible(false);
@@ -32,7 +32,7 @@ function Guests() {
 
   useEffect(()=>{
     fetchGuests();
-  }, [id])
+  }, [fetchGuests])
   return (
     <article className='flex flex-col'>
       <div className="border-b-2 border-blue-500 flex justify-between items-center py-2 my-2">

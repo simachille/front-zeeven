@@ -5,17 +5,24 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { server } from '../../config';
+import { type } from 'os';
+
+type UserCredentials = {
+  username: string, 
+  password: string
+}
 const schema = yup.object({
   username: yup.string().email("Email invalide").required("Ce champ est requis"),
   password: yup.string().required("Ce champ est requis"),
 }).required();
 
 function Credentials() {
-  const { register, handleSubmit, formState:{ errors } } = useForm({
+  const { register, handleSubmit, formState:{ errors } } = useForm<UserCredentials>({
     resolver: yupResolver(schema)
   });
   
-  const onSubmit = ({username, password}: {username: string, password: string}) => {
+  const onSubmit = (credentials: UserCredentials) => {
+    const {username, password} = credentials;
     signIn("credentials", {username, password, callbackUrl: `${server}/account`})
   };
 
