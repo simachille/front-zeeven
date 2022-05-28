@@ -32,6 +32,12 @@ permissions:
   contents: read
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+
   
   docker:
     runs-on: ubuntu-latest
@@ -39,7 +45,7 @@ jobs:
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-
+        
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
     
