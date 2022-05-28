@@ -37,8 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      run: | 
+    - run: | 
         echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
         echo "Current repository ${{ github.repositort }}."
         ls -al
