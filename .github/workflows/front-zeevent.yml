@@ -54,4 +54,4 @@ jobs:
           password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
           key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
           source: "docker-compose.yml"
-          target: "tmp"
+          target: " /opt/applications/zeeven/front-zeeven"
