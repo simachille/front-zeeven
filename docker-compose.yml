@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  front-zeeven:
-    container_name: front-zeeven
+  app-zeeven:
+    container_name: app-zeeven
     # The official v2 Traefik docker image
-    image: simachille/front-zeeven
+    image: simachille/app-zeeven
     # Enables the web UI and tells Traefik to listen to docker
    
     restart: always
