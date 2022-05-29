@@ -26,7 +26,6 @@ jobs:
         script: |
           sudo mkdir -p /opt/applications/zeeven/front-zeeven
 
-
   copy-configs:
     name: "copy configs"
     runs-on: ubuntu-latest
