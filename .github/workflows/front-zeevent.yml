@@ -51,5 +51,6 @@ jobs:
           port: ${{ secrets.RECETTE_APPLICATIONS_PORT }}
           username: ${{ secrets.RECETTE_APPLICATIONS_USERNAME }}
           password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
+          key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
           source: "dpcker-compose.yml"
           target: "tmp"
