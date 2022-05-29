@@ -26,6 +26,7 @@ jobs:
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
           sudo mkdir -p /opt/applications/zeeven/front-zeeven
+          sudo chmod ugo+rwx /opt/applications/zeeven/front-zeeven
 
 
   copy-configs:
