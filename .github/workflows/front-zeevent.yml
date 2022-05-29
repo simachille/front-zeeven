@@ -5,9 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: front-zeeven    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14.x'                # set this to the node version to use
+  NODE_VERSION: '14.x'
 
 permissions:
   contents: read
@@ -38,6 +36,7 @@ jobs:
           context: .
           push: true
           tags: simachille/front-zeeven:latest
+  
   copy-configs:
     name: "copy configs"
     runs-on: ubuntu-latest
@@ -54,4 +53,19 @@ jobs:
           password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
           key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
           source: "docker-compose.yml"
-          target: " /opt/applications/zeeven/front-zeeven"
+          target: "/opt/applications/zeeven/front-zeeven"
+
+  run-container:
+    name: "Run container"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run container
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.RECETTE_APPLICATIONS_HOST }}
+        port: ${{ secrets.RECETTE_APPLICATIONS_PORT }}
+        username: ${{ secrets.RECETTE_APPLICATIONS_USERNAME }}
+        password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
+        key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
+        script: |
+          docker-compose -f /opt/applications/zeeven/front-zeeven/docker-compose.yml up -d
