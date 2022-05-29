@@ -25,8 +25,8 @@ jobs:
         password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
-          sudo mkdir -p /opt/applications/zeeven/front-zeeven
-          sudo chmod ugo+rwx /opt/applications/zeeven/front-zeeven
+          sudo mkdir -p /opt/applications/zeeven/app-zeeven
+          sudo chmod ugo+rwx /opt/applications/zeeven/app-zeeven
 
 
   copy-configs:
@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
           key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
           source: "docker-compose.yml"
-          target: "/opt/applications/zeeven/front-zeeven"
+          target: "/opt/applications/zeeven/app-zeeven"
 
   dockerize:
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: simachille/front-zeeven:latest
+          tags: simachille/app-zeeven:latest
   
 
   run-container:
@@ -87,4 +87,4 @@ jobs:
         password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
-          docker-compose -f /opt/applications/zeeven/front-zeeven/docker-compose.yml up -d
+          docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml up -d
