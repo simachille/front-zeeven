@@ -25,7 +25,7 @@ jobs:
         password: ${{ secrets.RECETTE_APPLICATIONS_PASSWPRD }}
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
-          mkdir - /opt/applications/zeeven/front-zeeven
+          mkdir -p /opt/applications/zeeven/front-zeeven
 
 
   copy-configs:
