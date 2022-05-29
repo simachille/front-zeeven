@@ -58,6 +58,7 @@ jobs:
   run-container:
     name: "Run container"
     runs-on: ubuntu-latest
+    needs: copy-configs
     steps:
     - name: Run container
       uses: appleboy/ssh-action@master
