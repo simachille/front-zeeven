@@ -4,7 +4,7 @@ services:
   app-zeeven:
     container_name: app-zeeven
     # The official v2 Traefik docker image
-    image: simachille/app-zeeven
+    image: simachille/app-zeeven:latest
     # Enables the web UI and tells Traefik to listen to docker
    
     restart: always
