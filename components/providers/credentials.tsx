@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { server } from '../../config';
-import { type } from 'os';
 
 type UserCredentials = {
   username: string, 

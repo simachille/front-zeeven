@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import  {LogoutOutlined, PlusCircleOutlined} from '@ant-design/icons';
-import { getSession, signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import {useUser} from '../../../../hooks/use-user/useUser'
 import { NewEventContext } from '../../../../context';
-import { Profile } from '../../../../context/event-data';
 function Header() {
 
   const {state: {event}, updateStep} = useContext(NewEventContext);
