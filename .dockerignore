@@ -27,12 +27,3 @@ build/Release
 node_modules
 
 server/*.spec.js
-components
-config
-context
-hooks
-pages
-public
-services
-styles
-utils
