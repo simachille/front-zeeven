@@ -88,7 +88,7 @@ jobs:
         key: ${{ secrets.RECETTE_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
           docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml stop
-          docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml rm -r
+          docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml rm -folder
           docker-compose rmi simachille/app-zeeven:latest
           docker-compose rmi simachille/front-zeeven:latest
           docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml up -d
