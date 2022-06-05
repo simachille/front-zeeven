@@ -7,10 +7,10 @@ import eventReducer from './EventReducer';
 export const NewEventContext = createContext({
   state: INITIAL_STATE,
   resetEvent: () => {},
-  updateEvent: () => {},
-  updateDates: () => {},
-  updateContact: () => {},
-  updateStep: () => {}
+  updateEvent: (data: any) => {},
+  updateDates: (data: any) => {},
+  updateContact: (data: any) => {},
+  updateStep: (data: any) => {}
 });
 
 function EventContext({children}: ProviderProps) {
