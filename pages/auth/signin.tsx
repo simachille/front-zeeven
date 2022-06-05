@@ -6,7 +6,9 @@ import Credentials from '../../components/providers/credentials';
 import { GetServerSideProps } from 'next';
 
 function SignIn({ providers }: {providers: ClientSafeProvider[]}) {
- 
+ console.log('====================================');
+ console.log(providers);
+ console.log('====================================');
 	return (
 		<OpenedStack>
       <>
