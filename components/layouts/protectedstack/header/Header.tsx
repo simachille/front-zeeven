@@ -7,7 +7,7 @@ import {useUser} from '../../../../hooks/use-user/useUser'
 import { NewEventContext } from '../../../../context';
 function Header() {
 
-  const {state: {event}, updateStep} = useContext(NewEventContext);
+  const {resetEvent} = useContext(NewEventContext);
   const {firstName} = useUser();
   
   const router = useRouter();
@@ -17,7 +17,7 @@ function Header() {
   }
 
   const createNewEvent = () => {
-    updateStep({step: 0})
+    resetEvent();
     router.push('/account/creer-evenement');
   }
 
