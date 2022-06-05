@@ -14,7 +14,7 @@ function ScheduleList({dates, schedules}: {dates: Date[], schedules: Schedule[]}
                   <h4 className="font-extrabold text-blue-800">
                     {schedule.title}
                   </h4>
-                  <div dangerouslySetInnerHTML={{__html: schedule.note}}></div>
+                 {schedule.note ? (<div dangerouslySetInnerHTML={{__html: schedule.note}}></div>) : null }
               </div>
             </div>
           ))}
