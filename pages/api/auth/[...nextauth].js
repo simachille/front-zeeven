@@ -3,6 +3,7 @@ import GithubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials"
 import {backend} from '../../../config'
 import jwt_decode from "jwt-decode";
+import log from "logging-service"
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -78,5 +79,17 @@ export default NextAuth({
     error: '/auth/error', // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
+  debug: true,
+  logger: {
+    error(code, metadata) {
+      log.error(code, metadata)
+    },
+    warn(code) {
+      log.warn(code)
+    },
+    debug(code, metadata) {
+      log.debug(code, metadata)
+    }
   }
 })
