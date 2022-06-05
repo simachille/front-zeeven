@@ -23,7 +23,7 @@ export const tabGroupStyleClasses: Record<TabStyle, string> = {
   underline: 'flex-wrap -mb-px',
   pills: 'flex-wrap font-medium text-sm text-gray-500 dark:text-gray-400',
   fullWidth:
-    'hidden text-sm font-medium rounded-lg divide-x divide-gray-200 shadow sm:flex dark:divide-gray-700 dark:text-gray-400',
+    'text-sm font-medium rounded-lg divide-x divide-gray-200 shadow sm:flex dark:divide-gray-700 dark:text-gray-400',
 };
 
 export const tabItemStyleClasses: Record<TabStyle, Record<TabItemStatus, string>> = {
@@ -123,7 +123,7 @@ export const TabsComponent: FC<TabsProps> = ({ children, className, style = 'def
           <button
             key={index}
             type="button"
-            aria-controls={`${id}-tabpanel-${index}`}
+            aria-controls={`tabpanel-${index}`}
             aria-selected={index === activeTab}
             className={classNames(
               'text-lg flex items-center justify-center p-4 first:ml-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
@@ -136,7 +136,7 @@ export const TabsComponent: FC<TabsProps> = ({ children, className, style = 'def
               },
             )}
             disabled={tab.disabled}
-            id={`${id}-tab-${index}`}
+            id={`tab-${index}`}
             onClick={() => handleClick({ target: index })}
             onKeyDown={(event) => handleKeyboard({ event, target: index })}
             ref={(element) => (tabRefs.current[index] = element as HTMLButtonElement)}
@@ -152,10 +152,10 @@ export const TabsComponent: FC<TabsProps> = ({ children, className, style = 'def
         {tabs.map((tab, index) => (
           <div
             key={index}
-            aria-labelledby={`${id}-tab-${index}`}
+            aria-labelledby={`tab-${index}`}
             className={classNames('lg:px-8 xl:px-8 py-2 bg-white rounded-bl-lg rounded-br-lg', className, tab.className)}
             hidden={index !== activeTab}
-            id={`${id}-tabpanel-${index}`}
+            id={`tab-${index}`}
             role="tabpanel"
             tabIndex={0}
           >

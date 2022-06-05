@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
 
 @tailwind base;
@@ -35,7 +35,7 @@
   [multiple],
   textarea,
   select{
-    @apply w-full rounded-lg shadow-sm border border-gray-300 text-black focus:border-blue-500 focus:ring-blue-500
+    @apply w-full inline-block rounded-lg shadow-sm border border-gray-300 text-black focus:border-blue-500 focus:ring-blue-500
   }
 
   [type='checkbox'],

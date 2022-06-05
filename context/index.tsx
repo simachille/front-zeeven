@@ -7,22 +7,25 @@ import eventReducer from './EventReducer';
 export const NewEventContext = createContext({
   state: INITIAL_STATE,
   resetEvent: () => {},
-  updateEvent: (data: any) => {},
-  updateContact: (data: Profile) => {},
-  updateStep: ({step}: {step: number}) => {}
+  updateEvent: () => {},
+  updateDates: () => {},
+  updateContact: () => {},
+  updateStep: () => {}
 });
 
 function EventContext({children}: ProviderProps) {
-  const {UPDATE_STEP, UPDATE_EVENT, UPDATE_CONTACT, RESET_EVENT} = ActionType;
+  const {UPDATE_STEP, UPDATE_DATES, UPDATE_EVENT, UPDATE_CONTACT, RESET_EVENT} = ActionType;
   const [state, dispatch] = useReducer(eventReducer, INITIAL_STATE);
-  const updateStep = useCallback((data: any) => dispatch({ type: UPDATE_STEP,  data}),[UPDATE_STEP]);
-  const updateEvent = useCallback((data: any) => dispatch({data, type: UPDATE_EVENT}),[UPDATE_EVENT]);
-  const updateContact= useCallback((data: any) => dispatch({data, type: UPDATE_CONTACT}),[UPDATE_CONTACT]);
+  const updateStep = useCallback((data: any) => dispatch({ type: UPDATE_STEP, data}),[UPDATE_STEP]);
+  const updateDates = useCallback((data: any) => dispatch({ type: UPDATE_DATES, data}),[UPDATE_DATES]);
+  const updateContact= useCallback((data: any) => dispatch({type: UPDATE_CONTACT, data }),[UPDATE_CONTACT]);
   const resetEvent= useCallback(() => dispatch({type: RESET_EVENT}),[RESET_EVENT]);
+  const updateEvent = useCallback((data: any) => dispatch({data, type: UPDATE_EVENT}),[UPDATE_EVENT]);
   const valueMemo = useMemo(
     () => ({
       state,
       resetEvent,
+      updateDates,
       updateContact,
       updateEvent,
       updateStep
@@ -30,6 +33,7 @@ function EventContext({children}: ProviderProps) {
     [
       state,
       resetEvent,
+      updateDates,
       updateContact,
       updateEvent,
       updateStep

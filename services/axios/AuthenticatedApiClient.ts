@@ -5,7 +5,7 @@ import { getSession, signOut } from 'next-auth/react';
 
 const AuthenticatedApiClient = () => {
   const defaultOptions = {
-    baseURL: `${backend}/api`,
+    baseURL: `${process.env.API_URL}/api`,
     headers: { 
       'Content-Type': 'application/json',
     },
@@ -30,12 +30,11 @@ const AuthenticatedApiClient = () => {
       return response;
     },
     (error) => {
-      console.log(error);
-      
       const {response: {status}} = error;
       if(Number(status) === 401) {
         signOut();
       }
+      return Promise.reject(error);
     },
   );
 

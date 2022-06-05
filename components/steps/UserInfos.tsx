@@ -2,8 +2,7 @@ import { MouseEventHandler, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { NewEventContext } from '../../context';
-import { Event, Profile, State } from '../../context/event-data';
+import { Profile} from '../../context/event-data';
 type Params = {
   prevFormStep?: MouseEventHandler, 
   nextFormStep: Function, 
@@ -22,20 +21,26 @@ const schema = yup.object({
         .required("Ce champ est requis"),
   phone: yup.string()
         .required("Ce champ est requis")
+        .matches(/^\d+$/, "Téléphone invalide")
         .min(10, "Téléphone invalide")
         .max(10, "Téléphone invalide"),
 }).required();
 
 function UserInfos({ title, prevFormStep, nextFormStep, defaultValues, adjective = 'Votre'}: Params) {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { isSubmitSuccessful, errors } } = useForm({
     defaultValues,
     resolver: yupResolver(schema)
   });
   
   const onSubmit = (profile: Profile) => {
-    reset({})
     nextFormStep(profile);
   };
+
+ useEffect(()=> {
+   if(isSubmitSuccessful) {
+    reset()
+   }
+  }, [isSubmitSuccessful, reset])
 	return (
 		 <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className='font-nunito text-2xl mb-2 text-blue-800'>{title}</h2>

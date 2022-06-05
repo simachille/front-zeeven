@@ -6,8 +6,9 @@ import DateDisplay from '../../components/date-display/DateDisplay';
 import {Tabs} from '../../components/Tabs/Index';
 import Guests from '../../components/guests/Guests';
 import { Event } from '../../context/event-data';
+import Schedules from '../../components/schedule/Schedules';
 function EventDetail() {
-  const [event, setEvent] = useState<Event>({days:[]});
+  const [event, setEvent] = useState<Event>({dates:[]});
   const {query: {id = []}} = useRouter();
   const readData = useCallback(
     async () => {
@@ -23,14 +24,14 @@ function EventDetail() {
     readData();
   }, [readData])
   return (
-      <>
-        <article className='border border-gray-300 bg-white p-6 rounded-xl my-4'>
-          <h2 className='color text-gray-600 font-semibold text-lg font-nunito '>{event.name}</h2>
+    <ProtectedStack>
+        <article className='border border-gray-300 bg-white p-3 rounded-xl my-4'>
+          <h2 className='color text-gray-600 font-semibold text-lg font-nunito text-center md:text-left'>{event.name}</h2>
           {
-            event.days ? 
+            event.dates ? 
             (
-              <div className="flex my-1">
-                {event.days.map((day: Date, index: number) => <DateDisplay entry={day} key={index}/>)}
+              <div className="flex my-1 flex-col md:flex-row ">
+                {event.dates.map((day: Date, index: number) => <span className='md:mr-2 text-center my-1 md:my-0 text-gray-500 text-md' key={index}><DateDisplay entry={day} /></span>)}
               </div>
             )
             : null 
@@ -41,18 +42,11 @@ function EventDetail() {
             <Guests />
           </Tabs.Item>
           <Tabs.Item title="Programme">
-            Programme content
+            <Schedules dates={event.dates}/>
           </Tabs.Item>
         </Tabs.Group>
-      </>
+      </ProtectedStack>
   )
 }
 
-EventDetail.getLayout = function getLayout(page: ReactNode) {
-  return (
-		<ProtectedStack>
-      {page}
-		</ProtectedStack>
-  )
-}
 export default EventDetail;

@@ -36,13 +36,13 @@ function DateDisplay({entry}:{entry: Date}) {
 
     const day = date.getDate() 
 
-    const dateAstring = `${dayName}, ${day < 10 ? `0${day}`: day} ${monthName} ${year}`;
+    const dateAstring = `${dayName} ${day < 10 ? `0${day}`: day} ${monthName} ${year}`;
     setFormattedDate(dateAstring);
   }, [entry])
   return (
-    <span className='mr-2 text-gray-500 text-md'>
+    <>
       {formattedDate}
-    </span>
+    </>
   )
 }
 

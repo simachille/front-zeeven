@@ -18,7 +18,7 @@ function Header() {
 
   const createNewEvent = () => {
     updateStep({step: 0})
-    router.push('/account/new-event');
+    router.push('/account/creer-evenement');
   }
 
   return (

@@ -1,21 +1,21 @@
 import React, {useEffect, useState, useCallback} from 'react'
-import  {UserAddOutlined} from '@ant-design/icons';
-import GuestEdit from './GuestEdit';
+import  {PlusCircleOutlined} from '@ant-design/icons';
 import { Profile } from '../../context/event-data';
 import { useRouter } from 'next/router';
 import AuthenticatedApiClient from '../../services/axios/AuthenticatedApiClient';
-import GuestList from './GuestList';
+import ScheduleList from './ScheduleList';
+import ScheduleEdit from './ScheduleEdit';
 
-function Guests() {
+function Schedules({dates}: {dates: Date[]}) {
   const {query: {id = ''}} = useRouter();
-  const [guests, setGuests] = useState([]);
+  const [schedules, setSchedules] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
   
-  const fetchGuests = useCallback(async () => {
+  const fetchSchedules = useCallback(async () => {
     try {
       const apiClient = AuthenticatedApiClient();
-      const {data} = await apiClient.get(`event/${id[0]}/guest`);
-      setGuests(data);
+      const {data} = await apiClient.get(`event/${id[0]}/schedule`);
+      setSchedules(data);
     } catch (error) {
     }
   }, [id])
@@ -24,29 +24,29 @@ function Guests() {
     setFormVisible(false);
     try {
       const apiClient = AuthenticatedApiClient();
-      await apiClient.post(`event/${id[0]}/guest`, JSON.stringify(profile));
-      fetchGuests();
+      await apiClient.post(`event/${id[0]}/schedule`, JSON.stringify(profile));
+      fetchSchedules();
     } catch (error) {
     }
   };
 
   useEffect(()=>{
-    fetchGuests();
-  }, [fetchGuests])
+    fetchSchedules();
+  }, [fetchSchedules])
   return (
     <article className='flex flex-col p-3'>
       <div className="border-b-2 border-blue-500 flex justify-between items-center py-2 my-2">
         <span className='text-blue-800'>
-          Vos invités ({guests.length})
+          Votre programme
         </span>
         <button type='button' onClick={() => setFormVisible(!formVisible)}>
-          <UserAddOutlined className='text-2xl text-blue-800'/>
+          <PlusCircleOutlined className='text-xl text-blue-800'/>
         </button>
       </div>
-      {formVisible ? <GuestEdit handleSubmit={onSubmit} /> : null }
-      {guests.length ? <GuestList guests={guests} /> : null }
+      {formVisible ? <ScheduleEdit dates={dates} handleSubmit={onSubmit} /> : null }
+      {schedules.length ? <ScheduleList schedules={schedules} dates={dates} /> : null }
     </article>
   )
 }
 
-export default Guests
+export default Schedules
