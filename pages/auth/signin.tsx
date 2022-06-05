@@ -30,6 +30,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const providers = await getProviders();
 
   return {
-    props: { csrfToken,providers },
+    props: { providers },
   }
 }
