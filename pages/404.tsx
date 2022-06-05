@@ -1,6 +1,7 @@
 import React from 'react'
 import ProtectedStack from '../components/layouts/protectedstack/Index'
 import {useRouter} from "next/router";
+import OpenedStack from '../components/layouts/openedstack/Index';
 
 function PageNotFound() {
 	const router = useRouter();
@@ -8,7 +9,7 @@ function PageNotFound() {
 		router.push('/');
 	}
   return (
-    <ProtectedStack>
+    <OpenedStack>
         
         <div className='bg-white p-5 rounded-xl text-blue-800'>
           <p className='text-center my-5'>La page que vous recherchez n'existe pas</p>
@@ -19,7 +20,7 @@ function PageNotFound() {
             </button>
           </p>
         </div>
-    </ProtectedStack>
+    </OpenedStack>
   )
 }
 
