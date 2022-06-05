@@ -91,4 +91,4 @@ jobs:
           #docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml rm -f
           #docker rmi simachille/app-zeeven:latest
           #docker rmi simachille/front-zeeven:latest
-          sudo docker-compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml up -d
+          sudo docker compose -f /opt/applications/zeeven/app-zeeven/docker-compose.yml up -d
