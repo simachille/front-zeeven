@@ -11,7 +11,7 @@ services:
       - "3000:3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app-zeeven.rule=Headers(`X-Host`, `app.zeeven.chillo.fr`)"
+      - "traefik.http.routers.app-zeeven.rule=Host(`X-Host`, `app.zeeven.chillo.fr`)"
     networks:
       - applications-network
 networks:
