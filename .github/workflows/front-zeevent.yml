@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - authentication
+      - custom-auth
   workflow_dispatch:
 
 env:
