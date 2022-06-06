@@ -14,6 +14,9 @@ const AuthenticatedApiClient = () => {
   const instance = axios.create(defaultOptions);
 
   instance.interceptors.request.use(async (request) => {
+    console.log('=============request===============');
+    console.log({request});
+    console.log('=============request===============');
     const data = await getSession();
     let token: any = {};
     if (data && data.token) {
