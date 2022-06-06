@@ -23,24 +23,30 @@ export default NextAuth({
         password: {  label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-       
-        console.log('=============next auth===============');
-        console.log({credentials, backend, backendProcess:process.env.API_URL });
-        console.log('=============next auth===============');
-        const res = await fetch(`${backend}/api/connexion`, {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
-        })
-        const {token} = await res.json();
-        const userInToken = jwt_decode(token);
-        const user = {...userInToken, name: `${userInToken.firstName} ${userInToken.lastName}` ,token};
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user
-        }
-        // Return null if user data could not be retrieved
-        return null
+       try {
+          console.log('=============next auth===============');
+          console.log({credentials, backend, backendProcess:process.env.API_URL });
+          console.log('=============next auth===============');
+          const res = await fetch(`${backend}/api/connexion`, {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" }
+          })
+          const {token} = await res.json();
+          const userInToken = jwt_decode(token);
+          const user = {...userInToken, name: `${userInToken.firstName} ${userInToken.lastName}` ,token};
+          // If no error and we have user data, return it
+          if (res.ok && user) {
+            return user
+          }
+          // Return null if user data could not be retrieved
+          return null
+       } catch (error) {
+        console.log('=============error===============');
+        console.log({error });
+        console.log('=============error===============');
+         
+       }
       }
     })
   ],
