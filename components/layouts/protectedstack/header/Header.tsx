@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React, { useContext} from 'react';
 import  {LogoutOutlined, PlusCircleOutlined} from '@ant-design/icons';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import {useUser} from '../../../../hooks/use-user/useUser'
 import { NewEventContext } from '../../../../context';
@@ -11,8 +10,7 @@ function Header() {
   const {firstName} = useUser();
   
   const router = useRouter();
-  const closeSession = async() => {
-    await signOut({redirect: false, callbackUrl: "/"});
+  const closeSession = () => {
     router.push('/');
   }
 
