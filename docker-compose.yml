@@ -8,10 +8,10 @@ services:
     restart: always
     ports:
       # The HTTP port
-      - "3000:3001"
-    #labels:
-    #  - "traefik.enable=true"
-    #  - "traefik.http.routers.app-zeeven.rule=Host(`X-Host`, `app.zeeven.chillo.fr`)"
+      - "3000:300"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app-zeeven.rule=Host(`X-Host`, `app.zeeven.chillo.fr`)"
     networks:
       - applications-network
 networks:
