@@ -32,7 +32,7 @@ const AuthenticatedApiClient = () => {
     (error) => {
       const {response: {status}} = error;
       if(Number(status) === 401) {
-        signOut();
+        
       }
       return Promise.reject(error);
     },
