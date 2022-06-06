@@ -1,7 +1,4 @@
-import { signIn } from 'next-auth/react';
 import React, { useEffect } from 'react';
-import OpenedStack from '../layouts/openedstack/Index';
-import { getCsrfToken, getProviders } from "next-auth/react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -22,7 +19,6 @@ function Email() {
   
   const onSubmit = (credentials: UserCredentials) => {
     const {email} = credentials;
-    signIn("email", { email})
   };
 
 	return (
