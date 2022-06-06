@@ -1,4 +1,3 @@
-import {signIn} from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import {useForm} from "react-hook-form";
@@ -21,7 +20,6 @@ function Credentials() {
 
 	const onSubmit = (credentials: UserCredentials) => {
 		const {username, password} = credentials;
-		signIn("credentials", {username, password})
 	};
 
 	return (
