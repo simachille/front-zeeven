@@ -1,7 +1,6 @@
 import React, { ReactNode, FC } from 'react';
 import Header from './header/Header';
 import Footer from './footer/Footer';
-import { getSession } from 'next-auth/react';
 import EventContext from '../../../context';
 import { GetServerSideProps } from 'next';
 interface Props {
@@ -19,21 +18,5 @@ const ProtectedStack: FC<Props> = ({ children }) =>{
       </section>
     </EventContext>
 	);
-}
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
-  if(!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      }
-    }
-  }
-  return {
-    props: {
-      session
-    },
-  }
 }
 export default ProtectedStack;
