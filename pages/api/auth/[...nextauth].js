@@ -3,7 +3,6 @@ import GithubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials"
 import {backend} from '../../../config'
 import jwt_decode from "jwt-decode";
-import log from "logging-service"
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -83,13 +82,19 @@ export default NextAuth({
   debug: true,
   logger: {
     error(code, metadata) {
-      log.error(code, metadata)
+      console.log('=========ERROR=============');
+      console.error({code, metadata})
+      console.log('=========ERROR===================');
     },
     warn(code) {
-      log.warn(code)
+      console.log('=========WARN=============');
+      console.log({code})
+      console.log('=========WARN===================');
     },
     debug(code, metadata) {
-      log.debug(code, metadata)
+      console.log('=========DEBUG=============');
+      console.error({code, metadata})
+      console.log('=========DEBUG===================');
     }
   }
 })
