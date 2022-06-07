@@ -23,30 +23,26 @@ export default NextAuth({
         password: {  label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-       try {
-          console.log('=============next auth===============');
-          console.log({credentials, backend, backendProcess:process.env.API_URL });
-          console.log('=============next auth===============');
-          const res = await fetch(`${backend}/api/connexion`, {
-            method: 'POST',
-            body: JSON.stringify(credentials),
-            headers: { "Content-Type": "application/json" }
-          })
-          const {token} = await res.json();
-          const userInToken = jwt_decode(token);
-          const user = {...userInToken, name: `${userInToken.firstName} ${userInToken.lastName}` ,token};
-          // If no error and we have user data, return it
-          if (res.ok && user) {
-            return user
-          }
-          // Return null if user data could not be retrieved
-          return null
-       } catch (error) {
-        console.log('=============error===============');
-        console.log({error });
-        console.log('=============error===============');
-         
-       }
+        // You need to provide your own logic here that takes the credentials
+        // submitted and returns either a object representing a user or value
+        // that is false/null if the credentials are invalid.
+        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
+        // You can also use the `req` object to obtain additional parameters
+        // (i.e., the request IP address)
+        const res = await fetch(`${backend}/api/connexion`, {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" }
+        })
+        const {token} = await res.json();
+        const userInToken = jwt_decode(token);
+        const user = {...userInToken, name: `${userInToken.firstName} ${userInToken.lastName}` ,token};
+        // If no error and we have user data, return it
+        if (res.ok && user) {
+          return user
+        }
+        // Return null if user data could not be retrieved
+        return null
       }
     })
   ],
@@ -82,23 +78,5 @@ export default NextAuth({
     error: '/auth/error', // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  },
-  debug: true,
-  logger: {
-    error(code, metadata) {
-      console.log('=========ERROR=============');
-      console.error({code, metadata})
-      console.log('=========ERROR===================');
-    },
-    warn(code) {
-      console.log('=========WARN=============');
-      console.log({code})
-      console.log('=========WARN===================');
-    },
-    debug(code, metadata) {
-      console.log('=========DEBUG=============');
-      console.error({code, metadata})
-      console.log('=========DEBUG===================');
-    }
   }
 })
