@@ -7,7 +7,6 @@ const AuthenticatedApiClient = () => {
   const defaultOptions = {
     baseURL: `${process.env.API_URL}/api`,
     headers: { 
-      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   };
