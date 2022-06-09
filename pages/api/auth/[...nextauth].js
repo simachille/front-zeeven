@@ -72,6 +72,17 @@ export default NextAuth({
       return session;
     }
   },
+  logger: {
+    error(code, metadata) {
+      console.error({code, metadata})
+    },
+    warn(code) {
+      console.log({code})
+    },
+    debug(code, metadata) {
+      console.log({code, metadata})
+    }
+  },
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
