@@ -31,7 +31,7 @@ export default NextAuth({
         // (i.e., the request IP address)
         try {
           const api = process.env.API_URL;
-          const res = await fetch(`/api/connexion`, {
+          const res = await fetch(`http://ms-zeeven/api/connexion`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" }
