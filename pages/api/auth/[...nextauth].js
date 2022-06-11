@@ -29,20 +29,32 @@ export default NextAuth({
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch(`${backend}/api/connexion`, {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
-        })
-        const {token} = await res.json();
-        const userInToken = jwt_decode(token);
-        const user = {...userInToken, name: `${userInToken.firstName} ${userInToken.lastName}` ,token};
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user
+        try {
+          const api = process.env.API_URL;
+          const res = await fetch(`${backend}/api/connexion`, {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" }
+          })
+          const {token} = await res.json();
+          const userInToken = jwt_decode(token);
+          const user = {...userInToken, name: `${userInToken.firstName} ${userInToken.lastName}` ,token};
+          // If no error and we have user data, return it
+
+          console.log('==========CONEXION SUCCESS===============');
+          console.log({token, backend, api});
+          console.log('===========CONEXION SUCCESS=============');
+          if (res.ok && user) {
+            return user
+          }
+          // Return null if user data could not be retrieved
+          return null
+        } catch (error) {
+          const api = process.env.API_URL;
+          console.log('==========CONEXION ERROR===============');
+          console.log({error, backend, api});
+          console.log('===========CONEXION ERROR=============');
         }
-        // Return null if user data could not be retrieved
-        return null
       }
     })
   ],
